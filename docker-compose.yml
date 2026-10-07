@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:7-alpine
+    container_name: order_event_broker
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    networks:
+      - order-network
+  order-api:
+    build:
+      context: ./services/order-api
+      dockerfile: Dockerfile
+    container_name: order_api
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_QUEUE=order_processing_queue
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - order-network
+  order-worker:
+    build:
+      context: ./services/order-worker
+      dockerfile: Dockerfile
+    container_name: order_worker
+    restart: unless-stopped
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_QUEUE=order_processing_queue
+      - WORKER_ID=worker-docker-1
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - order-network
+
+networks:
+  order-network:
+    driver: bridge
+
+volumes:
+  redis_data:
+    driver: local
