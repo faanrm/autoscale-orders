@@ -6,6 +6,9 @@
 
 const http = require('http');
 
+// CLI Arguments:
+// - argv[2] (ORDER_COUNT): Total number of orders to generate (default: 20)
+// - argv[3] (DELAY_MS)   : Delay in milliseconds between each order (default: 100ms
 const API_URL = process.env.API_URL || 'http://localhost:8080';
 const ORDER_COUNT = parseInt(process.argv[2] || '20', 10);
 const DELAY_MS = parseInt(process.argv[3] || '100', 10);
@@ -109,7 +112,7 @@ async function main() {
   console.log('ALL ORDERS INJECTED INTO REDIS QUEUE!');
   console.log('='.repeat(70));
   console.log('Observe live KEDA auto-scaling using:');
-  console.log('   watch kubectl get pods -n projet-examen -l app=order-worker');
+  console.log('   watch kubectl get pods  -l app=order-worker');
   console.log('='.repeat(70));
 
   console.log('\nMonitoring queue drain by workers...');

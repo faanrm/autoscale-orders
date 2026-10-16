@@ -1,0 +1,17 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: order-worker-scaler
+spec:
+  scaleTargetRef:
+    name: order-worker
+  minReplicaCount: 0
+  maxReplicaCount: 10
+  pollingInterval: 5
+  cooldownPeriod: 15
+  triggers:
+    - type: redis
+      metadata:
+        address: redis-service.default.svc.cluster.local:6379
+        listName: order_processing_queue
+        listLength: "2"

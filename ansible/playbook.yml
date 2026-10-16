@@ -1,0 +1,40 @@
+---
+- name: Prepare deployment server
+  hosts: deploy_servers
+  become: true
+  tasks:
+    - name: Update Arch repository
+      pacman:
+        update_cache: true
+      when: ansible_os_family == "Archlinux"
+
+    - name: Install Docker and Docker Compose on Arch
+      pacman:
+        name:
+          - docker
+          - docker-compose
+        state: present
+      when: ansible_os_family == "Archlinux"
+    - name: Update Debian/Ubuntu repository
+      apt:
+        update_cache: true
+      when: ansible_os_family == "Debian"
+
+    - name: Install Docker and Docker Compose on Debian/Ubuntu
+      apt:
+        name:
+          - docker.io
+          - docker-compose
+        state: present
+      when: ansible_os_family == "Debian"
+    - name: Start and enable Docker service
+      service:
+        name: docker
+        state: started
+        enabled: true
+
+    - name: Add User into docker group
+      user:
+        name: "{{ ansible_facts['env']['SUDO_USER'] | default(ansible_facts['user_id']) }}"
+        groups: docker
+        append: true
