@@ -10,31 +10,35 @@ on:
 
 jobs:
   validate-and-deploy-k8s:
-    name: 1. Validate & Prepare Kubernetes Deployment
+    name: 1. Validate & Deploy Kubernetes Manifests
     runs-on: ubuntu-latest
     if: github.event_name == 'push' || github.event.workflow_run.conclusion == 'success'
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Install kubectl
-        uses: azure/setup-kubectl@v3
+      - name: Create Ephemeral Kind Cluster
+        uses: helm/kind-action@v1.9.0
         with:
-          version: 'latest'
+          cluster_name: test-cluster
+          wait: 60s
 
-      - name: Validate Core Kubernetes Manifests (Dry-Run)
+      - name: Deploy & Validate Manifests in Cluster
         run: |
-          echo "Validating Redis Manifest..."
-          kubectl apply --dry-run=client --validate=false -f k8s/redis.yaml
+          echo "Applying Redis Manifest..."
+          kubectl apply -f k8s/redis.yaml
 
-          echo "Validating Order API Manifest..."
-          kubectl apply --dry-run=client --validate=false -f k8s/order-api.yaml
+          echo "Applying Order API Manifest..."
+          kubectl apply -f k8s/order-api.yaml
 
-          echo "Validating Order Worker Manifest..."
-          kubectl apply --dry-run=client --validate=false -f k8s/order-worker.yaml
+          echo "Applying Order Worker Manifest..."
+          kubectl apply -f k8s/order-worker.yaml
 
-          echo "Validating Monitoring & Grafana Manifests..."
-          kubectl apply --dry-run=client --validate=false -f k8s/monitoring.yaml
+          echo "Applying Monitoring Manifest..."
+          kubectl apply -f k8s/monitoring.yaml
+
+          echo "Checking deployments..."
+          kubectl get deployments -A
 
       - name: Validate Terraform Syntax
         uses: hashicorp/setup-terraform@v3
