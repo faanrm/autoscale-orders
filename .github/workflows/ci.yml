@@ -6,9 +6,13 @@ on:
   pull_request:
     branches: [ "main" ]
 
+permissions:
+  contents: read
+  packages: write
+
 jobs:
   test-and-build-typescript:
-    name: Test & Compile TypeScript
+    name: 1. Test & Compile TypeScript
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -35,8 +39,8 @@ jobs:
           npm ci
           npm run build
 
-  build-docker-images:
-    name: Build Docker Container Images
+  build-and-push-ghcr:
+    name: 2. Build & Push to GHCR (GitHub Packages)
     needs: test-and-build-typescript
     runs-on: ubuntu-latest
     steps:
@@ -46,16 +50,27 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Build Order API Docker Image
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build & Push Order API Image
         uses: docker/build-push-action@v5
         with:
           context: ./services/order-api
-          push: false
-          tags: order-api:latest
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: |
+            ghcr.io/faanrm/order-api:latest
+            ghcr.io/faanrm/order-api:${{ github.sha }}
 
-      - name: Build Order Worker Docker Image
+      - name: Build & Push Order Worker Image
         uses: docker/build-push-action@v5
         with:
           context: ./services/order-worker
-          push: false
-          tags: order-worker:latest
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: |
+            ghcr.io/faanrm/order-worker:latest
+            ghcr.io/faanrm/order-worker:${{ github.sha }}

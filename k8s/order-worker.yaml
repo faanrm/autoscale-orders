@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: order-worker
-          image: order-worker:latest
+          image: ghcr.io/faanrm/order-worker:latest
           imagePullPolicy: IfNotPresent
           env:
             - name: REDIS_HOST

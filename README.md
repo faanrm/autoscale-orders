@@ -1,36 +1,52 @@
-# Autoscale Orders (KEDA & Redis)
+# Autoscale Orders — Sujet 14 (Event-Driven Autoscaling)
 
-Projet de mise a l'echelle event-driven avec KEDA, Redis et Kubernetes.
+Mise à l'échelle pilotée par les événements avec **KEDA**, **Redis** et **Kubernetes**.
 
-## Prerequis
+---
 
-- Docker
-- kind
-- kubectl
-- Node.js (v18+)
+## 1. Présentation du Projet
 
-## 1. Demarrage du cluster et des services
+Ce projet implémente une architecture événementielle asynchrone capable d'absorber des pics imprévisibles de commandes e-commerce tout en garantissant une consommation nulle de ressources au repos (**Scale-to-Zero**) :
+- **API d'ingestion (`order-api`) :** Reçoit les commandes en HTTP POST et les empile immédiatement dans Redis.
+- **Broker de messages (`redis`) :** File d'attente volatile en mémoire vive.
+- **Workers de traitement (`order-worker`) :** Microservices autonomes dépilant les commandes via `BRPOP`.
+- **Orchestration d'Autoscaling (`KEDA`) :** Sonde la file Redis et ajuste dynamiquement le nombre de pods workers de 0 à 10 répliques.
+- **Observabilité (`Prometheus` + `Grafana`) :** Capture en temps réel la taille de la file et les répliques actives.
+- **Registre de Conteneurs :** Les images Docker sont automatiquement publiées sur **GitHub Container Registry (GHCR)** sous `ghcr.io/faanrm/order-api` et `ghcr.io/faanrm/order-worker`.
 
-Creer le cluster kind avec le mapping de port :
+---
+
+## 2. Prérequis
+
+- **Docker** (v20+)
+- **kind** (v0.20+)
+- **kubectl**
+- **Node.js** (v18+)
+
+---
+
+## 3. Déploiement Complet de A à Z
+
+### Étape 1 : Création du cluster Kubernetes local (Kind)
 ```bash
 kind create cluster --name autoscale-cluster --config kind-config.yaml
 ```
 
-Construire et charger les images locales dans kind :
+### Étape 2 : Construction et chargement des images Docker
 ```bash
-docker build -t order-api:latest ./services/order-api
-docker build -t order-worker:latest ./services/order-worker
+docker build -t ghcr.io/faanrm/order-api:latest ./services/order-api
+docker build -t ghcr.io/faanrm/order-worker:latest ./services/order-worker
 
-kind load docker-image order-api:latest --name autoscale-cluster
-kind load docker-image order-worker:latest --name autoscale-cluster
+kind load docker-image ghcr.io/faanrm/order-api:latest --name autoscale-cluster
+kind load docker-image ghcr.io/faanrm/order-worker:latest --name autoscale-cluster
 ```
 
-Installer KEDA :
+### Étape 3 : Installation de KEDA
 ```bash
 kubectl apply --server-side -f https://github.com/kedacore/keda/releases/download/v2.14.0/keda-2.14.0.yaml
 ```
 
-Installer kube-state-metrics :
+### Étape 4 : Installation de kube-state-metrics
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/kube-state-metrics/main/examples/standard/service-account.yaml \
   -f https://raw.githubusercontent.com/kubernetes/kube-state-metrics/main/examples/standard/cluster-role.yaml \
@@ -39,7 +55,7 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/kube-state-metrics
   -f https://raw.githubusercontent.com/kubernetes/kube-state-metrics/main/examples/standard/service.yaml
 ```
 
-Deployer les services, KEDA et le monitoring :
+### Étape 5 : Déploiement des applications et du monitoring
 ```bash
 kubectl apply -f k8s/redis.yaml
 kubectl apply -f k8s/order-api.yaml
@@ -48,41 +64,51 @@ kubectl apply -f k8s/keda.yaml
 kubectl apply -f k8s/monitoring.yaml
 ```
 
-Verifier le statut des pods :
+Vérifier que tous les pods sont prêts :
 ```bash
 kubectl get pods -A
 ```
 
-## 2. Acces aux interfaces
+---
 
-API des commandes :
-- URL : http://localhost:30080
+## 4. Accès aux Interfaces
 
-Grafana (tableau de bord pre-charge) :
-```bash
-kubectl port-forward svc/grafana 3000:3000
-```
-- URL : http://localhost:3000
+- **API de commandes :** `http://localhost:30080` (NodePort direct)
+- **Tableau de bord Grafana (pré-configuré et auto-provisionné) :**
+  ```bash
+  kubectl port-forward svc/grafana 3000:3000
+  ```
+  Accès : `http://localhost:3000` (identifiants par défaut : `admin` / `admin` ou accès anonyme activé).
+- **Prometheus :**
+  ```bash
+  kubectl port-forward svc/prometheus 9090:9090
+  ```
+  Accès : `http://localhost:9090`.
 
-Prometheus :
-```bash
-kubectl port-forward svc/prometheus 9090:9090
-```
-- URL : http://localhost:9090
+---
 
-## 3. Test de charge et Scale-to-Zero
+## 5. Procédure de Démonstration (Pic de Charge et Scale-to-Zero)
 
-Dans un terminal, observer les pods en temps reel :
-```bash
-watch kubectl get pods -l app=order-worker
-```
+1. Ouvrir un premier terminal pour observer l'état des pods workers :
+   ```bash
+   watch -n 1 kubectl get pods -l app=order-worker
+   ```
+   *Constat au repos : `No resources found` (0 worker alloué).*
 
-Dans un autre terminal, injecter une vague de 30 commandes :
-```bash
-API_URL=http://localhost:30080 node scripts/simulate_orders.js 30 50
-```
+2. Dans un second terminal, injecter une vague de 30 commandes :
+   ```bash
+   API_URL=http://localhost:30080 node scripts/simulate_orders.js 30 50
+   ```
 
-Comportement attendu :
-- Au repos : 0 pod worker.
-- Sous charge : KEDA scale automatiquement jusqu'a 8 pods.
-- File vide : retour automatique a 0 pod apres 15 secondes de cooldown.
+3. Comportement observé :
+   - KEDA détecte la file et déclenche instantanément l'autoscaling des workers en parallèle.
+   - Les workers dépilent les 30 commandes en quelques secondes.
+   - Dès que la file est vide, une période de sécurité (cooldown de 15s) s'enclenche.
+   - Les pods sont automatiquement détruits : retour à **0 pod**.
+
+---
+
+## 6. Documentation Complémentaire
+
+- **Choix Techniques, Alternatives et Limites :** Voir [CHOIX_TECHNIQUES.md](CHOIX_TECHNIQUES.md).
+- **Script Vidéo de Présentation :** Voir [VIDEO_SCRIPT.md](VIDEO_SCRIPT.md).

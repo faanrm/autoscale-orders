@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: order-api
-          image: order-api:latest
+          image: ghcr.io/faanrm/order-api:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
