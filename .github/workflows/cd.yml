@@ -10,7 +10,7 @@ on:
 
 jobs:
   validate-and-deploy-k8s:
-    name: 1. Validate & Deploy Kubernetes Manifests
+    name: Validate & Deploy Kubernetes Manifests
     runs-on: ubuntu-latest
     if: github.event_name == 'push' || github.event.workflow_run.conclusion == 'success'
     steps:

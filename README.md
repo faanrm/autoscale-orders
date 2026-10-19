@@ -111,4 +111,3 @@ kubectl get pods -A
 ## 6. Documentation Complémentaire
 
 - **Choix Techniques, Alternatives et Limites :** Voir [CHOIX_TECHNIQUES.md](CHOIX_TECHNIQUES.md).
-- **Script Vidéo de Présentation :** Voir [VIDEO_SCRIPT.md](VIDEO_SCRIPT.md).

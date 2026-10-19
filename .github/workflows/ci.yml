@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   test-and-build-typescript:
-    name: 1. Test & Compile TypeScript
+    name: Test & Compile TypeScript
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -40,7 +40,7 @@ jobs:
           npm run build
 
   build-and-push-ghcr:
-    name: 2. Build & Push to GHCR (GitHub Packages)
+    name: Build & Push to GHCR (GitHub Packages)
     needs: test-and-build-typescript
     runs-on: ubuntu-latest
     steps:
