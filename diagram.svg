@@ -1,0 +1,188 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 923.8436666666666 1745.4" width="923.8436666666666" height="1745.4" style="--bg:#1F1F1F;--fg:#CCCCCC;--line:#CCCCCC;--accent:#0078D4;--muted:#CCCCCCCC;--surface:#181818;--border:#CCCCCC;background:var(--bg)">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap');
+  text { font-family: 'Inter', system-ui, sans-serif; }
+  svg {
+    /* Derived from --bg and --fg (overridable via --line, --accent, etc.) */
+    --_text:          var(--fg);
+    --_text-sec:      var(--muted, color-mix(in srgb, var(--fg) 60%, var(--bg)));
+    --_text-muted:    var(--muted, color-mix(in srgb, var(--fg) 40%, var(--bg)));
+    --_text-faint:    color-mix(in srgb, var(--fg) 25%, var(--bg));
+    --_line:          var(--line, color-mix(in srgb, var(--fg) 50%, var(--bg)));
+    --_arrow:         var(--accent, color-mix(in srgb, var(--fg) 85%, var(--bg)));
+    --_node-fill:     var(--surface, color-mix(in srgb, var(--fg) 3%, var(--bg)));
+    --_node-stroke:   var(--border, color-mix(in srgb, var(--fg) 20%, var(--bg)));
+    --_group-fill:    var(--bg);
+    --_group-hdr:     color-mix(in srgb, var(--fg) 5%, var(--bg));
+    --_inner-stroke:  color-mix(in srgb, var(--fg) 12%, var(--bg));
+    --_key-badge:     color-mix(in srgb, var(--fg) 10%, var(--bg));
+  }
+</style>
+<defs>
+  <marker id="arrowhead" markerWidth="8" markerHeight="5" refX="7" refY="2.5" orient="auto">
+    <polygon points="0 0, 8 2.5, 0 5" fill="var(--_arrow)" stroke="var(--_arrow)" stroke-width="0.75" stroke-linejoin="round" />
+  </marker>
+  <marker id="arrowhead-start" markerWidth="8" markerHeight="5" refX="1" refY="2.5" orient="auto-start-reverse">
+    <polygon points="8 0, 0 2.5, 8 5" fill="var(--_arrow)" stroke="var(--_arrow)" stroke-width="0.75" stroke-linejoin="round" />
+  </marker>
+</defs>
+<g class="subgraph" data-id="INGRESS" data-label="Flux Utilisateurs &amp; Trafic">
+  <rect x="476.1476666666666" y="40" width="407.696" height="96.9" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="476.1476666666666" y="40" width="407.696" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="488.1476666666666" y="54" font-size="12" font-weight="600" fill="var(--_text-sec)" dy="4.199999999999999">Flux Utilisateurs &amp; Trafic</text>
+</g>
+<g class="subgraph" data-id="K8S" data-label="Cluster Kubernetes (Kind / Cloud)">
+  <rect x="40" y="265.20000000000005" width="803.2476666666666" height="1440.2" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="40" y="265.20000000000005" width="803.2476666666666" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="52" y="279.20000000000005" font-size="12" font-weight="600" fill="var(--_text-sec)" dy="4.199999999999999">Cluster Kubernetes (Kind / Cloud)</text>
+<g class="subgraph" data-id="INGESTION" data-label="1. Couche d'Ingestion">
+  <rect x="580.0356666666667" y="891.5000000000001" width="231.783" height="215.60000000000002" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="580.0356666666667" y="891.5000000000001" width="231.783" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="592.0356666666667" y="905.5000000000001" font-size="12" font-weight="600" fill="var(--_text-sec)" dy="4.199999999999999">1. Couche d&#39;Ingestion</text>
+</g>
+<g class="subgraph" data-id="BROKER" data-label="2. Broker de Messages">
+  <rect x="181.34199999999998" y="1235.4" width="328.59624999999994" height="215.60000000000002" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="181.34199999999998" y="1235.4" width="328.59624999999994" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="193.34199999999998" y="1249.4" font-size="12" font-weight="600" fill="var(--_text-sec)" dy="4.199999999999999">2. Broker de Messages</text>
+</g>
+<g class="subgraph" data-id="KEDA_CORE" data-label="3. Moteur Event-Driven">
+  <rect x="126.89549999999997" y="309.20000000000005" width="290.06325" height="454.00000000000006" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="126.89549999999997" y="309.20000000000005" width="290.06325" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="138.89549999999997" y="323.20000000000005" font-size="12" font-weight="600" fill="var(--_text-sec)" dy="4.199999999999999">3. Moteur Event-Driven</text>
+</g>
+<g class="subgraph" data-id="WORKERS" data-label="4. Couche de Traitement">
+  <rect x="56" y="942.4000000000001" width="228.819" height="113.80000000000001" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="56" y="942.4000000000001" width="228.819" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="68" y="956.4000000000001" font-size="12" font-weight="600" fill="var(--_text-sec)" dy="4.199999999999999">4. Couche de Traitement</text>
+</g>
+<g class="subgraph" data-id="OBSERVABILITY" data-label="5. Observabilité &amp; Métriques">
+  <rect x="547.3731666666666" y="1235.4" width="279.87449999999995" height="454.00000000000006" rx="0" ry="0" fill="var(--_group-fill)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <rect x="547.3731666666666" y="1235.4" width="279.87449999999995" height="28" rx="0" ry="0" fill="var(--_group-hdr)" stroke="var(--_node-stroke)" stroke-width="1" />
+  <text x="559.3731666666666" y="1249.4" font-size="12" font-weight="600" fill="var(--_text-sec)" dy="4.199999999999999">5. Observabilité &amp; Métriques</text>
+</g>
+</g>
+<polyline class="edge" data-from="User" data-to="API_SVC" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="POST /orders" points="796.8511666666666,120.9 796.8511666666666,178.9 749.4771666666666,178.9 749.4771666666666,247.20000000000002 729.2243333333333,247.20000000000002 729.2243333333333,935.5000000000001" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="Sim" data-to="API_SVC" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Rafales POST /orders" points="595.0031666666666,120.9 595.0031666666666,178.9 642.3771666666667,178.9 642.3771666666667,247.20000000000002 662.6299999999999,247.20000000000002 662.63,935.5000000000001" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="API_PODS" data-to="REDIS_SVC" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="RPUSH commandes" points="631.5219999999999,825.9000000000001 631.5219999999999,859.9000000000001 597.2231666666667,859.9000000000001 597.2231666666667,928.2 366.27325,928.2 366.27325,1014.2" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="KEDA_OP" data-to="REDIS_POD" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Surveillance de la file LLEN" points="259.04341666666664,311.90000000000003 259.04341666666664,323.90000000000003 284.52049999999997,323.90000000000003 284.52049999999997,516.0000000000001 342.81899999999996,516.0000000000001 342.81899999999996,928.2 267.60825,928.2 267.60825,1080 285.02099999999996,1080 285.02099999999996,1116" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="HPA" data-to="WORKER_PODS" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Scale 0 -&gt; N -&gt; 0" points="188.70799999999997,482.00000000000006 188.70799999999997,516.0000000000001 130.40949999999998,516.0000000000001 130.40949999999998,721.2" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="WORKER_PODS" data-to="REDIS_POD" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="BLPOP: Dépile les commandes" points="130.40949999999998,775 130.40949999999998,928.2 221.18149999999997,928.2 221.18149999999997,1116" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="API_PODS" data-to="PROM" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="order_queue_length" points="680.3323333333333,825.9000000000001 680.3323333333333,859.9000000000001 714.6311666666666,859.9000000000001 714.6311666666666,1148.3000000000002 690.6978333333333,1148.3000000000002 690.6978333333333,1184.3000000000002" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="API_SVC" data-to="API_PODS" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="695.9271666666666,989.3000000000002 695.9271666666666,1037.3000000000002" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="REDIS_SVC" data-to="REDIS_POD" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="406.27324999999996,1333.2 406.27324999999996,1345.2 388.8605,1345.2 388.8605,1381.2" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="SCALED_OBJ" data-to="KEDA_OP" data-style="dotted" data-arrow-start="false" data-arrow-end="true" data-label="Configure" points="276.61424999999997,407.00000000000006 276.61424999999997,523.3000000000001" fill="none" stroke="var(--_line)" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="KEDA_OP" data-to="HPA" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Pilote les répliques" points="254.1850833333333,577.1000000000001 254.1850833333333,589.1000000000001 228.70799999999997,589.1000000000001 228.70799999999997,693.4000000000001" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="KSM" data-to="PROM" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="kube_deployment_status_replicas" points="654.0021666666667,1333.2 654.0021666666667,1413.5 677.9354999999999,1413.5 677.9354999999999,1449.5" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="PROM" data-to="GRAFANA" data-style="solid" data-arrow-start="false" data-arrow-end="true" data-label="Source de données PromQL" points="704.3166666666666,1503.3000000000002 704.3166666666666,1619.6000000000001" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<g class="edge-label" data-from="User" data-to="API_SVC" data-label="POST /orders">
+  <rect x="706.9771666666666" y="185.9" width="84.178" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="749.0661666666665" y="201.05" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">POST /orders</text>
+</g>
+<g class="edge-label" data-from="Sim" data-to="API_SVC" data-label="Rafales POST /orders">
+  <rect x="581.3771666666667" y="185.9" width="121.60000000000001" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="642.1771666666666" y="201.05" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Rafales POST /orders</text>
+</g>
+<g class="edge-label" data-from="API_PODS" data-to="REDIS_SVC" data-label="RPUSH commandes">
+  <rect x="541.7231666666667" y="890.9000000000001" width="110.908" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="597.1771666666666" y="906.0500000000001" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">RPUSH commandes</text>
+</g>
+<g class="edge-label" data-from="KEDA_OP" data-to="REDIS_POD" data-label="Surveillance de la file LLEN">
+  <rect x="268.81899999999996" y="718.95" width="147.14200000000002" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="342.39" y="734.1" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Surveillance de la file LLEN</text>
+</g>
+<g class="edge-label" data-from="HPA" data-to="WORKER_PODS" data-label="Scale 0 -&gt; N -&gt; 0">
+  <rect x="84.90949999999997" y="547" width="90.71200000000002" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="130.26549999999997" y="562.15" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Scale 0 -&gt; N -&gt; 0</text>
+</g>
+<g class="edge-label" data-from="WORKER_PODS" data-to="REDIS_POD" data-label="BLPOP: Dépile les commandes">
+  <rect x="49.90949999999998" y="890.9000000000001" width="160.80400000000003" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="130.3115" y="906.0500000000001" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">BLPOP: Dépile les commandes</text>
+</g>
+<g class="edge-label" data-from="API_PODS" data-to="PROM" data-label="order_queue_length">
+  <rect x="656.6311666666666" y="890.9000000000001" width="115.066" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="714.1641666666666" y="906.0500000000001" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">order_queue_length</text>
+</g>
+<g class="edge-label" data-from="SCALED_OBJ" data-to="KEDA_OP" data-label="Configure">
+  <rect x="244.61424999999997" y="450.0000000000001" width="63.982" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="276.60524999999996" y="465.1500000000001" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Configure</text>
+</g>
+<g class="edge-label" data-from="KEDA_OP" data-to="HPA" data-label="Pilote les répliques">
+  <rect x="175.20799999999997" y="620.1" width="106.75000000000003" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="228.58299999999997" y="635.25" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Pilote les répliques</text>
+</g>
+<g class="edge-label" data-from="KSM" data-to="PROM" data-label="kube_deployment_status_replicas">
+  <rect x="563.5021666666667" y="1376.2" width="180.40599999999998" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="653.7051666666666" y="1391.3500000000001" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">kube_deployment_status_replicas</text>
+</g>
+<g class="edge-label" data-from="PROM" data-to="GRAFANA" data-label="Source de données PromQL">
+  <rect x="628.3166666666667" y="1546.3" width="151.3" height="30.3" rx="2" ry="2" fill="var(--bg)" stroke="var(--_inner-stroke)" stroke-width="1" />
+  <text x="703.9666666666667" y="1561.45" text-anchor="middle" font-size="11" font-weight="400" fill="var(--_text-sec)" dy="3.8499999999999996">Source de données PromQL</text>
+</g>
+<g class="node" data-id="class" data-label="class" data-shape="rectangle">
+  <rect x="373.5936666666666" y="174.3" width="74.554" height="36.900000000000006" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="410.8706666666666" y="192.75" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">class</text>
+</g>
+<g class="node" data-id="User" data-label="Client / Utilisateur" data-shape="stadium">
+  <rect x="725.8586666666666" y="84" width="141.985" height="36.900000000000006" rx="18.450000000000003" ry="18.450000000000003" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="796.8511666666666" y="102.45" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Client / Utilisateur</text>
+</g>
+<g class="node" data-id="Sim" data-label="Script Simulateur de Charge" data-shape="stadium">
+  <rect x="492.1476666666666" y="84" width="205.711" height="36.900000000000006" rx="18.450000000000003" ry="18.450000000000003" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="595.0031666666666" y="102.45" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)" dy="4.55">Script Simulateur de Charge</text>
+</g>
+<g class="node" data-id="API_SVC" data-label="Service: order-api-service
+NodePort: 30080" data-shape="rectangle">
+  <rect x="596.0356666666667" y="935.5000000000001" width="199.783" height="53.800000000000004" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="695.9271666666666" y="962.4000000000001" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="695.9271666666666" dy="-3.9000000000000012">Service: order-api-service</tspan><tspan x="695.9271666666666" dy="16.900000000000002">NodePort: 30080</tspan></text>
+</g>
+<g class="node" data-id="API_PODS" data-label="Pods: order-api
+Node.js / Express" data-shape="rectangle">
+  <rect x="622.7116666666667" y="1037.3000000000002" width="146.43099999999998" height="53.800000000000004" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="695.9271666666667" y="1064.2000000000003" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="695.9271666666667" dy="-3.9000000000000012">Pods: order-api</tspan><tspan x="695.9271666666667" dy="16.900000000000002">Node.js / Express</tspan></text>
+</g>
+<g class="node" data-id="REDIS_SVC" data-label="Service: redis-service
+Port: 6379" data-shape="rectangle">
+  <rect x="318.60825" y="1279.4" width="175.32999999999998" height="53.800000000000004" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="406.27324999999996" y="1306.3000000000002" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="406.27324999999996" dy="-3.9000000000000012">Service: redis-service</tspan><tspan x="406.27324999999996" dy="16.900000000000002">Port: 6379</tspan></text>
+</g>
+<g class="node" data-id="REDIS_POD" data-label="Pod: Redis Broker
+File FIFO: order_processing_queue" data-shape="rectangle">
+  <rect x="197.34199999999998" y="1381.2" width="255.35799999999998" height="53.800000000000004" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="325.02099999999996" y="1408.1000000000001" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="325.02099999999996" dy="-3.9000000000000012">Pod: Redis Broker</tspan><tspan x="325.02099999999996" dy="16.900000000000002">File FIFO: order_processing_queue</tspan></text>
+</g>
+<g class="node" data-id="KEDA_OP" data-label="KEDA Operator
+Contrôleur CRD" data-shape="rectangle">
+  <rect x="209.32674999999995" y="523.3000000000001" width="134.575" height="53.800000000000004" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="276.61424999999997" y="550.2" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="276.61424999999997" dy="-3.9000000000000012">KEDA Operator</tspan><tspan x="276.61424999999997" dy="16.900000000000002">Contrôleur CRD</tspan></text>
+</g>
+<g class="node" data-id="SCALED_OBJ" data-label="ScaledObject: order-worker-scaler
+min: 0 | max: 10 | seuil: 2/pod" data-shape="rectangle">
+  <rect x="152.26974999999996" y="353.20000000000005" width="248.689" height="53.800000000000004" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="276.61424999999997" y="380.1" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="276.61424999999997" dy="-3.9000000000000012">ScaledObject: order-worker-scaler</tspan><tspan x="276.61424999999997" dy="16.900000000000002">min: 0 | max: 10 | seuil: 2/pod</tspan></text>
+</g>
+<g class="node" data-id="HPA" data-label="Kubernetes HPA
+(Géré dynamiquement)" data-shape="rectangle">
+  <rect x="142.89549999999997" y="693.4000000000001" width="171.62499999999997" height="53.800000000000004" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="228.70799999999997" y="720.3000000000001" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="228.70799999999997" dy="-3.9000000000000012">Kubernetes HPA</tspan><tspan x="228.70799999999997" dy="16.900000000000002">(Géré dynamiquement)</tspan></text>
+</g>
+<g class="node" data-id="WORKER_PODS" data-label="Pods: order-worker (0 à N)
+Consommateurs BLPOP" data-shape="rectangle">
+  <rect x="72" y="986.4000000000001" width="196.819" height="53.800000000000004" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="170.40949999999998" y="1013.3000000000001" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="170.40949999999998" dy="-3.9000000000000012">Pods: order-worker (0 à N)</tspan><tspan x="170.40949999999998" dy="16.900000000000002">Consommateurs BLPOP</tspan></text>
+</g>
+<g class="node" data-id="KSM" data-label="kube-state-metrics
+Événements API Server" data-shape="rectangle">
+  <rect x="563.3731666666666" y="1279.4" width="181.25799999999998" height="53.800000000000004" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="654.0021666666667" y="1306.3000000000002" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="654.0021666666667" dy="-3.9000000000000012">kube-state-metrics</tspan><tspan x="654.0021666666667" dy="16.900000000000002">Événements API Server</tspan></text>
+</g>
+<g class="node" data-id="PROM" data-label="Prometheus Server
+Scrape interval: 2s" data-shape="rectangle">
+  <rect x="625.1731666666666" y="1449.5" width="158.287" height="53.800000000000004" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="704.3166666666666" y="1476.4" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="704.3166666666666" dy="-3.9000000000000012">Prometheus Server</tspan><tspan x="704.3166666666666" dy="16.900000000000002">Scrape interval: 2s</tspan></text>
+</g>
+<g class="node" data-id="GRAFANA" data-label="Grafana Dashboard
+Dashboard Auto-Provisionné" data-shape="rectangle">
+  <rect x="597.3856666666667" y="1619.6000000000001" width="213.86199999999997" height="53.800000000000004" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="704.3166666666666" y="1646.5000000000002" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="704.3166666666666" dy="-3.9000000000000012">Grafana Dashboard</tspan><tspan x="704.3166666666666" dy="16.900000000000002">Dashboard Auto-Provisionné</tspan></text>
+</g>
+</svg>
