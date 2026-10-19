@@ -1,0 +1,46 @@
+name: CD - Continuous Delivery
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_run:
+    workflows: [ "CI - Continuous Integration" ]
+    types:
+      - completed
+
+jobs:
+  validate-and-deploy-k8s:
+    name: 1. Validate & Prepare Kubernetes Deployment
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' || github.event.workflow_run.conclusion == 'success'
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install kubectl
+        uses: azure/setup-kubectl@v3
+        with:
+          version: 'latest'
+
+      - name: Validate Core Kubernetes Manifests (Dry-Run)
+        run: |
+          echo "Validating Redis Manifest..."
+          kubectl apply --dry-run=client -f k8s/redis.yaml
+
+          echo "Validating Order API Manifest..."
+          kubectl apply --dry-run=client -f k8s/order-api.yaml
+
+          echo "Validating Order Worker Manifest..."
+          kubectl apply --dry-run=client -f k8s/order-worker.yaml
+
+          echo "Validating Monitoring & Grafana Manifests..."
+          kubectl apply --dry-run=client -f k8s/monitoring.yaml
+
+      - name: Validate Terraform Syntax
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.7.0
+      - run: |
+          cd terraform
+          terraform init -backend=false
+          terraform validate

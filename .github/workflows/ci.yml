@@ -1,0 +1,61 @@
+name: CI - Continuous Integration
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test-and-build-typescript:
+    name: Test & Compile TypeScript
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 18
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: 'npm'
+          cache-dependency-path: |
+            services/order-api/package-lock.json
+            services/order-worker/package-lock.json
+
+      - name: Build Order API
+        run: |
+          cd services/order-api
+          npm ci
+          npm run build
+
+      - name: Build Order Worker
+        run: |
+          cd services/order-worker
+          npm ci
+          npm run build
+
+  build-docker-images:
+    name: Build Docker Container Images
+    needs: test-and-build-typescript
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Order API Docker Image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./services/order-api
+          push: false
+          tags: order-api:latest
+
+      - name: Build Order Worker Docker Image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./services/order-worker
+          push: false
+          tags: order-worker:latest
