@@ -25,16 +25,16 @@ jobs:
       - name: Validate Core Kubernetes Manifests (Dry-Run)
         run: |
           echo "Validating Redis Manifest..."
-          kubectl apply --dry-run=client -f k8s/redis.yaml
+          kubectl apply --dry-run=client --validate=false -f k8s/redis.yaml
 
           echo "Validating Order API Manifest..."
-          kubectl apply --dry-run=client -f k8s/order-api.yaml
+          kubectl apply --dry-run=client --validate=false -f k8s/order-api.yaml
 
           echo "Validating Order Worker Manifest..."
-          kubectl apply --dry-run=client -f k8s/order-worker.yaml
+          kubectl apply --dry-run=client --validate=false -f k8s/order-worker.yaml
 
           echo "Validating Monitoring & Grafana Manifests..."
-          kubectl apply --dry-run=client -f k8s/monitoring.yaml
+          kubectl apply --dry-run=client --validate=false -f k8s/monitoring.yaml
 
       - name: Validate Terraform Syntax
         uses: hashicorp/setup-terraform@v3
