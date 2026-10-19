@@ -16,7 +16,7 @@
       "targets": [
         {
           "datasource": { "type": "prometheus", "uid": "prometheus" },
-          "expr": "keda_scaler_metrics_value{scaler=\"redis\"} or vector(0)",
+          "expr": "order_queue_length or vector(0)",
           "legendFormat": "Commandes en attente",
           "refId": "A"
         }
